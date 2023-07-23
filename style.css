@@ -21,10 +21,12 @@ main {
 
 .control_panel {
   display: flex;
+  justify-content: space-around;
   align-items: center;
 }
 .control_panel div {
   display: flex;
+
   align-items: center;
 }
 

@@ -159,7 +159,7 @@ submitButton.addEventListener("click", (event) => {
   let guessedLetter = document.getElementById("user-input-text").value;
 
   //if letter has been used already gives an alert
-  if (guessedResult.includes(guessedLetter)) {
+  if (allTheGuessedLetters.includes(guessedLetter)) {
     alert("This letter has been used before! Try another one!");
     return;
   }
