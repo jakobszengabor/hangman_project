@@ -28,12 +28,22 @@ main {
   align-items: center;
 }
 
-/* First section style - picture*/
+/* Second section style - picture*/
+.image {
+  display: flex;
+  border: 1px solid grey;
+  width: 500px;
+}
 .image img {
   width: 300px;
   height: 300px;
 }
-
+.guess-panel {
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  border: 1px grey solid;
+}
 /* Second section style - form input container*/
 .user-input {
   display: flex;
@@ -54,4 +64,10 @@ main {
 p {
   letter-spacing: 1px;
   margin: 10px 10px;
+}
+
+/* Side panel section - guesd letters*/
+.guess-item {
+  display: flex;
+  justify-content: center;
 }

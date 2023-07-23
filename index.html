@@ -22,45 +22,36 @@
         <div class="control_panel" id="control_panel">
           <div>
             <i class="fa-solid fa-circle-check" style="color: #5dba3b"></i>
-            <p>10</p>
+            <p id="guessed-word-counter">0</p>
           </div>
           <div>
             <i class="fa-solid fa-circle-xmark" style="color: #e33516"></i>
-            <p>10</p>
+            <p id="not-guessed-word-counter">0</p>
           </div>
           <div>
             <i class="fa-solid fa-coins" style="color: #ffd43b"></i>
-            <p>10</p>
+            <p id="coin">100</p>
           </div>
           <div>
             <i class="fa-solid fa-trophy" style="color: #111648"></i>
-            <p>10</p>
+            <p id="score">0</p>
           </div>
           <div>
             <i class="fa-solid fa-heart-pulse fa-beat-fade" style="color: #ff0505"></i>
-            <p>10</p>
+            <p id="lifes">0</p>
           </div>
 
-          <button>New Game</button>
+          <button id="new-game">New Game</button>
         </div>
       </section>
 
       <section class="image" id="image">
         <!-- dinamikusan kell -->
         <img src="images/hangman-picture_1.png" alt="" />
-        <img src="images/hangman-picture_2.png" alt="" hidden />
-        <img src="" alt="" hidden />
-        <img src="" alt="" hidden />
-        <img src="" alt="" hidden />
-      </section>
-      <section class="user-input" id="user-input">
-        <input
-          type="text"
-          name="user-input-text"
-          id="user-input-text"
-          class="user-input-text"
-        />
-        <button class="submit" id="submit">Submit</button>
+
+        <div class="guess-panel" id="guess-panel">
+          <div class="guess-item" id="guess-item"></div>
+        </div>
       </section>
 
       <section class="word-card-container" id="word-card-container">
@@ -75,11 +66,11 @@
       <section>
         <div class="control_panel" id="control_panel">
           <!-- 10 coin -->
-          <button>Random</button>
+          <button id="random_button">Random</button>
           <!-- 15 coin -->
-          <button>Choose</button>
-          <!-- 20 coin -->
-          <button>Vowel</button>
+          <button id="choose_button">Choose</button>
+          <!-- 50 coin -->
+          <button id="next-word">Next word</button>
         </div>
       </section>
 
