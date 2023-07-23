@@ -69,6 +69,7 @@ function hangmanEngine(guessedLetter) {
 
 // Eventlisteners
 
+// Submit gomb
 let submitButton = document.getElementById("submit");
 
 submitButton.addEventListener("click", (event) => {

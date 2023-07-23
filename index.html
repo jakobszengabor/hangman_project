@@ -4,10 +4,47 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Hangman</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="data:image/png;base64,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" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="main-container" id="main-container">
+      <section>
+        <div class="control_panel" id="control_panel">
+          <div>
+            <i class="fa-solid fa-circle-check" style="color: #5dba3b"></i>
+            <p>10</p>
+          </div>
+          <div>
+            <i class="fa-solid fa-circle-xmark" style="color: #e33516"></i>
+            <p>10</p>
+          </div>
+          <div>
+            <i class="fa-solid fa-coins" style="color: #ffd43b"></i>
+            <p>10</p>
+          </div>
+          <div>
+            <i class="fa-solid fa-trophy" style="color: #111648"></i>
+            <p>10</p>
+          </div>
+          <div>
+            <i class="fa-solid fa-heart-pulse fa-beat-fade" style="color: #ff0505"></i>
+            <p>10</p>
+          </div>
+
+          <button>New Game</button>
+        </div>
+      </section>
+
       <section class="image" id="image">
         <!-- dinamikusan kell -->
         <img src="/images/hangman-picture_1.png" alt="" />
@@ -15,10 +52,6 @@
         <img src="" alt="" hidden />
         <img src="" alt="" hidden />
         <img src="" alt="" hidden />
-      </section>
-      <section class="user-input" id="user-input">
-        <input type="text" name="user-input-text" id="user-input-text" class="user-input-text" />
-        <button class="submit" id="submit">Submit</button>
       </section>
 
       <section class="word-card-container" id="word-card-container">
@@ -29,6 +62,21 @@
         <div class="word-card"><p>A</p></div>
         <div class="word-card"><p>C</p></div>
         <div class="word-card"><p>D</p></div> -->
+      </section>
+      <section>
+        <div class="control_panel" id="control_panel">
+          <!-- 10 coin -->
+          <button>Random</button>
+          <!-- 15 coin -->
+          <button>Choose</button>
+          <!-- 20 coin -->
+          <button>Vowel</button>
+        </div>
+      </section>
+
+      <section class="user-input" id="user-input">
+        <input type="text" name="user-input-text" id="user-input-text" class="user-input-text" />
+        <button class="submit" id="submit">Submit</button>
       </section>
     </main>
 
