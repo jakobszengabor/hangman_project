@@ -28,7 +28,8 @@ let guessedWordRewardEasy = 20;
 let guessedWordRewardHard = 40;
 
 let wordCard;
-
+let guessItemShowToPanel = document.createElement("div");
+guessItemShowToPanel.style["background-color"] = "rgba(255,115,119,255)";
 // Render engine
 function render(wordArray, guessedResult) {
   let cardContainer = document.getElementById("word-card-container");
@@ -49,6 +50,7 @@ function render(wordArray, guessedResult) {
 
     if (guessedResult.includes(i)) {
       letter.textContent = wordArray[i];
+      guessItemShowToPanel.style["background-color"] = "rgba(195,250,204,255)";
     } else {
       letter.textContent = "_";
     }
@@ -59,26 +61,26 @@ render(wordArray, "");
 // Create Guessed letters and words panel
 const guessItemPanelContainer = document.getElementById("guess-panel");
 
-// Checking the guessed number
+// Checking the user input the guessed number or word
 function hangmanEngine(guessedLetter) {
   //Don't leave the letter in input area
   document.getElementById("user-input-text").value = "";
 
   // Show the guessed letters and words on the panel to the user
-  const guessItemShowToPanel = document.createElement("div");
+  guessItemShowToPanel = document.createElement("div");
   guessItemShowToPanel.classList.add("guess-item");
   guessItemShowToPanel.textContent = guessedLetter;
+  guessItemShowToPanel.style["background-color"] = "rgba(255,115,119,255)";
   guessItemPanelContainer.append(guessItemShowToPanel);
 
   // User guessing the full word and found out all letters which gives the full word
-  if (guessedLetter === word /*|| guessedResult.length === wordArray.length*/) {
-    scoreValue +=
-      Number(guessedLetter.length - guessedResult.length) * Number(guessedWordRewardHard);
+  if (guessedLetter === word || guessedResult.length + 1 === wordArray.length) {
+    scoreValue += Number(wordArray.length - guessedResult.length) * Number(guessedWordRewardHard);
     score.textContent = scoreValue;
-
+    guessItemShowToPanel.style["background-color"] = "rgba(195,250,204,255)";
     coin.textContent =
       Number(coin.textContent) +
-      Number(guessedLetter.length - guessedResult.length) * Number(guessedWordLetterReward);
+      Number(wordArray.length - guessedResult.length) * Number(guessedWordLetterReward);
 
     console.log(score.textContent);
     console.log(score);
@@ -198,7 +200,7 @@ fetch(apiUrl)
   });
 
 // Function for NewGame and eventlistener for the next word
-function generateNextWord() {
+function generateNextWord(param) {
   guessedResult = [];
   allTheGuessedLetters = [];
   wrongCounter = maxLife;
@@ -216,6 +218,7 @@ function generateNextWord() {
       console.error("Error on request:", error);
       // Handle the error if it is necessary
     });
+  if (param) return alert(`The word was " ${word} " `);
 }
 
 // Next word Button => -50 coin
@@ -228,7 +231,7 @@ nextWord.addEventListener("click", () => {
 
   coin.textContent -= 50;
   notguessedWordCounter.textContent++;
-  generateNextWord();
+  generateNextWord(true);
 });
 
 // Random Button => -10 coin
@@ -241,12 +244,12 @@ randomButton.addEventListener("click", () => {
 
   if (wordArray.length - guessedResult.length <= 1) {
     if (Number(coin.textContent) < 50) {
-      alert("You dont have enough coin, for that!");
+      alert("You dont have enough coin, for that! It counts az a next word for 50!");
       return;
     }
     if (confirm("This action will cost 50 coins, which is the same price as the next word.")) {
       coin.textContent -= 50;
-      generateNextWord();
+      generateNextWord(true);
       return;
     } else {
       return;
@@ -270,7 +273,24 @@ randomButton.addEventListener("click", () => {
   for (let i = 0; i < wordArray.length; i++) {
     if (wordArray[i] === randomLetter) {
       randomLetterCounter++;
+
       coin.textContent -= 5; // Alapvető esetben 5 coint kap a user ha kitalál egy betűt. Ezért kell ezt az 5-öt levonni.
+    }
+    if (
+      randomLetterCounter >= 2 &&
+      wordArray.length === guessedResult.length + randomLetterCounter
+    ) {
+      if (Number(coin.textContent) < 50) {
+        alert("You dont have enough coin, for that! It counts az a next word for 50!");
+        return;
+      }
+      if (confirm("This action will cost 50 coins, which is the same price as the next word.")) {
+        coin.textContent -= 50;
+        generateNextWord(true);
+        return;
+      } else {
+        return;
+      }
     }
   }
 
