@@ -151,8 +151,8 @@ function startNewGame() {
 }
 // Eventlisteners
 
-// Submit gomb
-let submitButton = document.getElementById("submit");
+// Submit button
+let submitButton = document.getElementById("submit-button");
 
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
@@ -232,7 +232,7 @@ nextWord.addEventListener("click", () => {
 });
 
 // Random Button => -10 coin
-let randomButton = document.getElementById("random_button");
+let randomButton = document.getElementById("random-button");
 randomButton.addEventListener("click", () => {
   if (Number(coin.textContent) < 10) {
     alert("You dont have enough coin, for that!");
@@ -253,10 +253,10 @@ randomButton.addEventListener("click", () => {
     }
   }
 
-  coin.textContent -= 10;
   wordArray = word.split("");
   let unguessedLetterArray = [];
   let randomLetter = "";
+  let randomLetterCounter = 0;
 
   for (let i = 0; i < wordArray.length; i++) {
     if (!guessedResult.includes(i)) {
@@ -265,6 +265,14 @@ randomButton.addEventListener("click", () => {
   }
   randomLetter =
     wordArray[unguessedLetterArray[Math.floor(Math.random() * unguessedLetterArray.length)]];
+  coin.textContent -= 10;
+
+  for (let i = 0; i < wordArray.length; i++) {
+    if (wordArray[i] === randomLetter) {
+      randomLetterCounter++;
+      coin.textContent -= 5; // Alapvető esetben 5 coint kap a user ha kitalál egy betűt. Ezért kell ezt az 5-öt levonni.
+    }
+  }
 
   hangmanEngine(randomLetter);
 });
