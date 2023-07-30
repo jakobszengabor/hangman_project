@@ -46,11 +46,11 @@ main {
   width: 500px;
 }
 .image img {
-  width: 300px;
-  height: 300px;
+  width: 299px;
+  height: 421px;
 }
 .guess-panel {
-  min-width: 200px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   border: 1px grey solid;
@@ -124,4 +124,22 @@ button:active {
 }
 .new-game {
   padding: 0px 10px;
+}
+
+@media screen and (max-width: 520px) {
+  main {
+    width: 300px;
+  }
+  .image {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+  }
+  .image img {
+    height: 300px;
+  }
+  .guess-panel {
+    width: 100px;
+  }
 }

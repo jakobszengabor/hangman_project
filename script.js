@@ -4,8 +4,9 @@
 
 //Created word variable only with "" and wordArray into an empty array
 let word = "";
+let category = "";
 let wordArray = [];
-let maxLife = 6;
+let maxLife = 5;
 let wrongCounter = maxLife;
 let guessedResult = []; // Array of the index of the successfully guessed letters
 let allTheGuessedLetters = []; // Array of all the guessed letters
@@ -30,9 +31,16 @@ let guessedWordRewardHard = 40;
 let wordCard;
 let guessItemShowToPanel = document.createElement("div");
 guessItemShowToPanel.style["background-color"] = "rgba(255,115,119,255)";
+
+let cardContainer = document.getElementById("word-card-container");
+let imageSection = document.getElementById("image");
+imageSection.insertAdjacentHTML(
+  "afterbegin",
+  `<img src="/images/Hangman_rajz_0${1}.svg" alt="" />`
+);
+
 // Render engine
 function render(wordArray, guessedResult) {
-  let cardContainer = document.getElementById("word-card-container");
   cardContainer.textContent = "";
 
   for (let i = 0; i < wordArray.length; i++) {
@@ -73,6 +81,38 @@ function hangmanEngine(guessedLetter) {
   guessItemShowToPanel.style["background-color"] = "rgba(255,115,119,255)";
   guessItemPanelContainer.append(guessItemShowToPanel);
 
+  // User guessing a wrong letter
+  if (wordArray.indexOf(guessedLetter) === -1 && guessedLetter.length === 1) {
+    wrongCounter--;
+    lifes.textContent = wrongCounter;
+
+    let firstChild = imageSection.firstElementChild;
+    imageSection.removeChild(firstChild);
+
+    //let picture = `<img src="/images/Hangman_rajz_0${wrongCounter}.svg" alt="" />`;
+    imageSection.insertAdjacentHTML(
+      "afterbegin",
+      `<img src="/images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
+    );
+
+    if (wrongCounter === 0) {
+      let endGame = confirm(`Out of lives. You are dead. Really. Your Score: ${scoreValue}`);
+
+      if (endGame) {
+        location.reload();
+      } else {
+        render(wordArray, guessedResult);
+        let userInputSection = document.getElementById("user-input");
+        let helpButtonPanel = document.getElementById("help_button_panel");
+        cardContainer.innerHTML = "";
+        userInputSection.innerHTML = "";
+        helpButtonPanel.innerHTML = "";
+      }
+    }
+
+    return;
+  }
+
   // User guessing the full word and found out all letters which gives the full word
   if (guessedLetter === word || guessedResult.length + 1 === wordArray.length) {
     scoreValue += Number(wordArray.length - guessedResult.length) * Number(guessedWordRewardHard);
@@ -108,13 +148,6 @@ function hangmanEngine(guessedLetter) {
     return startNewGame();
   }
 
-  // User guessing a wrong letter
-  if (wordArray.indexOf(guessedLetter) === -1) {
-    wrongCounter--;
-    lifes.textContent = wrongCounter;
-    return;
-  }
-
   // User guessing a correct letter
   for (let i = 0; i < wordArray.length; i++) {
     if (wordArray[i] === guessedLetter) {
@@ -122,6 +155,7 @@ function hangmanEngine(guessedLetter) {
       coin.textContent = Number(coin.textContent) + guessedLetterReward;
     }
   }
+
   render(wordArray, guessedResult);
 }
 // Function for NewGame
@@ -158,7 +192,8 @@ let submitButton = document.getElementById("submit-button");
 
 submitButton.addEventListener("click", (event) => {
   event.preventDefault();
-  let guessedLetter = document.getElementById("user-input-text").value;
+  let guessedLetterInput = document.getElementById("user-input-text").value;
+  let guessedLetter = guessedLetterInput.toLowerCase();
 
   //if letter has been used already gives an alert
   if (allTheGuessedLetters.includes(guessedLetter)) {
@@ -185,11 +220,13 @@ userInput.addEventListener("keydown", (event) => {
 
 //Api Created
 const apiUrl = "https://random-word-api.herokuapp.com/word?";
+const apiUrl2 = " https://www.wordgamedb.com/api/v1/words/random";
 
-fetch(apiUrl)
+fetch(apiUrl2)
   .then((response) => response.json())
   .then((data) => {
-    word = data[0];
+    word = data.word; //data[0]
+    category = data.category;
     wordArray = word.split(""); // Word array create
     console.log("Random word:", word);
     render(wordArray, guessedResult);
@@ -218,6 +255,13 @@ function generateNextWord(param) {
       console.error("Error on request:", error);
       // Handle the error if it is necessary
     });
+
+  let firstChild = imageSection.firstElementChild;
+  imageSection.removeChild(firstChild);
+  imageSection.insertAdjacentHTML(
+    "afterbegin",
+    `<img src="/images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
+  );
   if (param) return alert(`The word was " ${word} " `);
 }
 
@@ -231,6 +275,7 @@ nextWord.addEventListener("click", () => {
 
   coin.textContent -= 50;
   notguessedWordCounter.textContent++;
+
   generateNextWord(true);
 });
 
