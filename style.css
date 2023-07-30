@@ -24,7 +24,7 @@ main {
   align-items: center;
   min-width: 100px;
   border: 1px grey solid;
-  background-color: whitesmoke;
+  background-color: rgba(220, 211, 216, 255);
 }
 
 /* Header section */
@@ -48,12 +48,14 @@ main {
 .image img {
   width: 299px;
   height: 421px;
+  background-color: rgba(240, 241, 243, 255);
 }
 .guess-panel {
   width: 200px;
   display: flex;
   flex-direction: column;
-  border: 1px grey solid;
+  border-left: 1px grey solid;
+  background-color: rgba(240, 241, 243, 255);
 }
 /* Side panel section - guesd letters*/
 .guess-item {
@@ -70,6 +72,7 @@ main {
 }
 .word-card {
   border: 1px grey solid;
+  background-color: rgba(240, 241, 243, 255);
 }
 p {
   letter-spacing: 1px;
@@ -98,29 +101,45 @@ p {
   align-items: center;
   padding-bottom: 10px;
 }
+.user-input-text {
+  background-color: rgba(240, 241, 243, 255);
+  height: 25px;
+  border: 1px grey solid;
+  padding-left: 10px;
+}
+.user-input-text:active {
+  outline: none;
+  border: 1px red solid;
+}
+.user-input-text:focus {
+  outline: none;
+  border: 1px red solid;
+}
 
 button {
-  cursor: pointer;
-  border-radius: 5px;
-  color: white;
-  background-color: #333;
   outline: none;
-
-  box-shadow: 0 0.1rem rgba(121, 121, 121, 0.65);
+  cursor: pointer;
+  height: 40px;
+  font-weight: 300;
+  border-radius: 3px;
+  padding: 12px 20px;
+  border: 0;
+  color: #fff;
+  background: #000a47;
+  margin: 10px 5px;
 }
 button:hover {
-  background-color: rgb(70, 70, 70);
-  box-shadow: 0 0rem rgba(121, 121, 121, 0.65);
+  transition: all 0.1s ease;
+  box-shadow: 0 0 0 0 #fff, 0 0 0 2px red;
 }
 
 button:active {
-  transform: translate(0, 0.1rem);
-  box-shadow: rgba(255, 255, 255, 0.65);
   color: red;
 }
 
 .submit-button {
   padding: 0px 10px;
+  height: 30px;
 }
 .new-game {
   padding: 0px 10px;
@@ -140,6 +159,7 @@ button:active {
     height: 300px;
   }
   .guess-panel {
-    width: 100px;
+    width: 200px;
+    border: 1px grey solid;
   }
 }
