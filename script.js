@@ -37,7 +37,7 @@ let cardContainer = document.getElementById("word-card-container");
 let imageSection = document.getElementById("image");
 imageSection.insertAdjacentHTML(
   "afterbegin",
-  `<img src="/images/Hangman_rajz_0${1}.svg" alt="" />`
+  `<img src="./images/Hangman_rajz_0${1}.svg" alt="" />`
 );
 
 // Render engine
@@ -93,7 +93,7 @@ function hangmanEngine(guessedLetter) {
     //let picture = `<img src="/images/Hangman_rajz_0${wrongCounter}.svg" alt="" />`;
     imageSection.insertAdjacentHTML(
       "afterbegin",
-      `<img src="/images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
+      `<img src="./images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
     );
 
     if (wrongCounter === 0) {
@@ -262,7 +262,7 @@ function generateNextWord(param) {
   imageSection.removeChild(firstChild);
   imageSection.insertAdjacentHTML(
     "afterbegin",
-    `<img src="/images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
+    `<img src="./images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
   );
   if (param) return alert(`The word was " ${word} " `);
 }
@@ -315,7 +315,7 @@ nextWordHard.addEventListener("click", () => {
   imageSection.removeChild(firstChild);
   imageSection.insertAdjacentHTML(
     "afterbegin",
-    `<img src="/images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
+    `<img src="./images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
   );
   if (true) return alert(`The word was " ${word} " `);
 });
