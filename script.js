@@ -154,6 +154,35 @@ function hangmanEngine(guessedLetter) {
       guessedWordCounter.textContent++;
       generateNextWord();
     }, 100);
+    // return;
+  }
+  if (guessedLetter !== word && guessedLetter.length > 1) {
+    wrongCounter--;
+    lifes.textContent = wrongCounter;
+    guessItemShowToPanel.style["background-color"] = "rgba(255,115,119,255)";
+    let firstChild = imageSection.firstElementChild;
+    imageSection.removeChild(firstChild);
+    imageSection.insertAdjacentHTML(
+      "afterbegin",
+      `<img src="./images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
+    );
+    if (wrongCounter === 0) {
+      let endGame = confirm(`Out of lives. You are dead. Really. Your Score: ${scoreValue}`);
+
+      if (endGame) {
+        location.reload();
+      } else {
+        render(wordArray, guessedResult);
+        let userInputSection = document.getElementById("user-input");
+        let helpButtonPanel = document.getElementById("help_button_panel");
+        cardContainer.innerHTML = "";
+        userInputSection.innerHTML = "";
+        helpButtonPanel.innerHTML = "";
+        categoryP.textContent = "See ya!";
+      }
+    }
+
+    console.log("hali");
     return;
   }
 
