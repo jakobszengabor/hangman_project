@@ -98,7 +98,7 @@ function hangmanEngine(guessedLetter) {
 
     if (wrongCounter === 0) {
       let endGame = confirm(
-        `The word was: ${word} "! You are out of lives. Your Score: ${scoreValue}`
+        `The word was: " ${word} "! You are out of lives. Your Score: ${scoreValue}`
       );
 
       if (endGame) {
