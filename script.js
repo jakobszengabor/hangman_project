@@ -197,6 +197,12 @@ submitButton.addEventListener("click", (event) => {
   let guessedLetter = guessedLetterInput.toLowerCase();
 
   //if letter has been used already gives an alert
+  if (guessedLetter === "" || guessedLetter === " ") {
+    alert("Dont leave it blank!");
+    return;
+  }
+
+  //if letter has been used already gives an alert
   if (allTheGuessedLetters.includes(guessedLetter)) {
     alert("This letter has been used before! Try another one!");
     return;
