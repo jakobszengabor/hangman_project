@@ -338,7 +338,7 @@ nextWordHard.addEventListener("click", () => {
     .then((response) => response.json())
     .then((data) => {
       word = data[0]; //data[0]
-      categoryP.textContent = "No help for hard mode.";
+      categoryP.textContent = "No category for hard word.";
       wordArray = word.split(""); // Word array create
       console.log("Random word:", word);
       render(wordArray, guessedResult);
