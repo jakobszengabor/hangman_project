@@ -151,6 +151,8 @@ function hangmanEngine(guessedLetter) {
     //Congratulate and start a New Game
     setTimeout(() => {
       alert(`Congratulations! The word was "${word}" `);
+      scoreValue += 20;
+      score.textContent = scoreValue;
       guessedWordCounter.textContent++;
       generateNextWord();
     }, 100);
