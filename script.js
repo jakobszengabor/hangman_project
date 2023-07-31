@@ -113,8 +113,23 @@ function hangmanEngine(guessedLetter) {
     return;
   }
 
+  // User getting out of lifes and start New Game
+  if (wrongCounter <= 0) {
+    alert(`Sorry, the word was "${word}".Try again `);
+    allTheGuessedLetters = [];
+    return startNewGame();
+  }
+
+  // User guessing a correct letter
+  for (let i = 0; i < wordArray.length; i++) {
+    if (wordArray[i] === guessedLetter) {
+      guessedResult.push(i);
+      coin.textContent = Number(coin.textContent) + guessedLetterReward;
+    }
+  }
+
   // User guessing the full word and found out all letters which gives the full word
-  if (guessedLetter === word || guessedResult.length + 1 === wordArray.length) {
+  if (guessedLetter === word || guessedResult.length === wordArray.length) {
     scoreValue += Number(wordArray.length - guessedResult.length) * Number(guessedWordRewardHard);
     score.textContent = scoreValue;
     guessItemShowToPanel.style["background-color"] = "rgba(195,250,204,255)";
@@ -137,23 +152,7 @@ function hangmanEngine(guessedLetter) {
       guessedWordCounter.textContent++;
       generateNextWord();
     }, 100);
-
     return;
-  }
-
-  // User getting out of lifes and start New Game
-  if (wrongCounter <= 0) {
-    alert(`Sorry, the word was "${word}".Try again `);
-    allTheGuessedLetters = [];
-    return startNewGame();
-  }
-
-  // User guessing a correct letter
-  for (let i = 0; i < wordArray.length; i++) {
-    if (wordArray[i] === guessedLetter) {
-      guessedResult.push(i);
-      coin.textContent = Number(coin.textContent) + guessedLetterReward;
-    }
   }
 
   render(wordArray, guessedResult);
