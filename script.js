@@ -97,7 +97,9 @@ function hangmanEngine(guessedLetter) {
     );
 
     if (wrongCounter === 0) {
-      let endGame = confirm(`Out of lives. You are dead. Really. Your Score: ${scoreValue}`);
+      let endGame = confirm(
+        `The word was: ${word} "! You are out of lives. Your Score: ${scoreValue}`
+      );
 
       if (endGame) {
         location.reload();
@@ -169,7 +171,7 @@ function hangmanEngine(guessedLetter) {
       `<img src="./images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
     );
     if (wrongCounter === 0) {
-      let endGame = confirm(`Out of lives. You are dead. Really. Your Score: ${scoreValue}`);
+      let endGame = confirm(`The word was " ${word} ". Your Score: ${scoreValue}`);
 
       if (endGame) {
         location.reload();
