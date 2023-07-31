@@ -113,7 +113,7 @@ p {
 }
 .user-input-text {
   background-color: rgba(240, 241, 243, 255);
-  height: 25px;
+  height: 30px;
   border: 1px grey solid;
   padding-left: 10px;
 }

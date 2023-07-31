@@ -32,6 +32,7 @@ let wordCard;
 let guessItemShowToPanel = document.createElement("div");
 guessItemShowToPanel.style["background-color"] = "rgba(255,115,119,255)";
 
+let categoryP = document.getElementById("category");
 let cardContainer = document.getElementById("word-card-container");
 let imageSection = document.getElementById("image");
 imageSection.insertAdjacentHTML(
@@ -107,6 +108,7 @@ function hangmanEngine(guessedLetter) {
         cardContainer.innerHTML = "";
         userInputSection.innerHTML = "";
         helpButtonPanel.innerHTML = "";
+        categoryP.textContent = "See ya!";
       }
     }
 
@@ -225,7 +227,7 @@ fetch(apiUrl2)
   .then((response) => response.json())
   .then((data) => {
     word = data.word; //data[0]
-    category = data.category;
+    categoryP.textContent = data.category;
     wordArray = word.split(""); // Word array create
     console.log("Random word:", word);
     render(wordArray, guessedResult);
@@ -242,10 +244,11 @@ function generateNextWord(param) {
   wrongCounter = maxLife;
   lifes.textContent = wrongCounter;
   guessItemPanelContainer.textContent = "";
-  fetch(apiUrl)
+  fetch(apiUrl2)
     .then((response) => response.json())
     .then((data) => {
-      word = data[0];
+      word = data.word; //data[0]
+      categoryP.textContent = data.category;
       wordArray = word.split(""); // Word array create
       console.log("Random word:", word);
       render(wordArray, guessedResult);
@@ -276,6 +279,45 @@ nextWord.addEventListener("click", () => {
   notguessedWordCounter.textContent++;
 
   generateNextWord(true);
+});
+
+// Next word Button => -50 coin hard
+let nextWordHard = document.getElementById("next-word-hard");
+nextWordHard.addEventListener("click", () => {
+  if (Number(coin.textContent) < 25) {
+    alert("You dont have enough coin, for that!");
+    return;
+  }
+
+  coin.textContent -= 25;
+  notguessedWordCounter.textContent++;
+
+  guessedResult = [];
+  allTheGuessedLetters = [];
+  wrongCounter = maxLife;
+  lifes.textContent = wrongCounter;
+  guessItemPanelContainer.textContent = "";
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      word = data[0]; //data[0]
+      categoryP.textContent = "No help for hard mode.";
+      wordArray = word.split(""); // Word array create
+      console.log("Random word:", word);
+      render(wordArray, guessedResult);
+    })
+    .catch((error) => {
+      console.error("Error on request:", error);
+      // Handle the error if it is necessary
+    });
+
+  let firstChild = imageSection.firstElementChild;
+  imageSection.removeChild(firstChild);
+  imageSection.insertAdjacentHTML(
+    "afterbegin",
+    `<img src="/images/Hangman_rajz_0${maxLife - wrongCounter + 1}.svg" alt="" />`
+  );
+  if (true) return alert(`The word was " ${word} " `);
 });
 
 // Random Button => -10 coin
